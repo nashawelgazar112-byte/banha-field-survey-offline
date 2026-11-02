@@ -3,115 +3,83 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#15579a">
-  <title>الحصر الميداني - حملة الحصبة</title>
+  <title>التحقق الميداني المستقل - حملة الحصبة</title>
+  <link rel="manifest" href="manifest.json">
   <style>
     * { box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f2f6fa;
-      color: #18324b;
-      padding: 16px;
+      margin: 0; padding: 14px; background: #f2f6fa;
+      font-family: Arial, sans-serif; color: #203247;
     }
-    .container {
-      max-width: 620px;
-      margin: 0 auto;
+    .container { max-width: 520px; margin: auto; }
+    .header {
+      background: #15579a; color: white; padding: 22px 15px;
+      border-radius: 15px; text-align: center; margin-bottom: 15px;
     }
-    header {
-      background: linear-gradient(135deg,#15579a,#087fb2);
-      color: white;
-      padding: 24px 18px;
-      border-radius: 18px;
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    header h2 { margin: 0 0 10px; }
-    header p { margin: 5px 0; line-height: 1.7; }
+    .header h2 { margin: 0 0 9px; font-size: 21px; }
+    .header p { margin: 5px 0; font-size: 14px; }
     .card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 3px 14px #173b5510;
+      background: white; padding: 18px; border-radius: 15px;
+      box-shadow: 0 3px 12px #0000000d;
     }
     label {
-      display: block;
-      font-weight: bold;
-      margin: 17px 0 8px;
+      display: block; font-weight: bold; margin: 14px 0 7px;
+      font-size: 14px;
     }
-    input, select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #cbd7e2;
-      border-radius: 10px;
-      font-size: 16px;
-      background: white;
-      color: #18324b;
+    input, select, textarea {
+      width: 100%; padding: 13px; border: 1px solid #ccd7e2;
+      border-radius: 9px; font-size: 16px; background: white;
+      font-family: inherit;
     }
+    textarea { resize: vertical; min-height: 60px; }
+    .hidden { display: none; }
     button {
-      width: 100%;
-      border: 0;
-      border-radius: 11px;
-      padding: 15px;
-      margin-top: 22px;
-      background: #087fb2;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
+      width: 100%; padding: 15px; border: 0; border-radius: 10px;
+      background: #087fb2; color: white; font-size: 17px;
+      font-weight: bold; margin-top: 20px; cursor: pointer;
     }
-    .note {
-      color: #607589;
+    button:disabled { opacity: .6; }
+    #message { text-align: center; margin-top: 14px; font-weight: bold; }
+    .note { font-size: 12px; color: #63758a; margin-top: 10px; }
+    .connection {
+      padding: 10px; border-radius: 9px; margin-bottom: 14px;
+      background: #e8f2fa; color: #15579a; text-align: center;
       font-size: 13px;
-      margin-top: 6px;
-    }
-    #reasonBox { display: none; }
-    #message {
-      margin-top: 15px;
-      text-align: center;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      color: #607589;
-      font-size: 13px;
-      margin: 18px 0;
     }
   </style>
 </head>
 <body>
 <div class="container">
-
-  <header>
+  <div class="header">
     <h2>التحقق الميداني المستقل</h2>
     <p>الحملة القومية للتطعيم ضد الحصبة والحصبة الألمانية</p>
     <p>الإدارة الصحية ببنها – قسم الطب الوقائي</p>
-  </header>
+  </div>
 
   <div class="card">
-    <h3>بيانات حصر الطفل</h3>
+    <div id="connection" class="connection">جاري فحص الاتصال...</div>
 
-    <form id="childForm">
-
+    <form id="recordForm">
       <label>الوحدة الصحية *</label>
       <select id="unit" required>
-        <option value="">اختاري الوحدة الصحية</option>
+        <option value="">جاري تحميل الوحدات...</option>
       </select>
 
       <label>العنوان *</label>
-      <input id="address" required placeholder="القرية أو المنطقة والعنوان">
+      <input id="address" required placeholder="اكتب عنوان الأسرة">
 
       <label>رقم تليفون ولي الأمر</label>
       <input id="phone" type="tel" inputmode="numeric"
-        placeholder="اختياري">
+        maxlength="11" placeholder="01xxxxxxxxx">
 
       <label>اسم الطفل *</label>
-      <input id="childName" required>
+      <input id="childName" required placeholder="اسم الطفل">
 
       <label>الفئة العمرية *</label>
       <select id="ageGroup" required>
-        <option value="">اختاري الفئة العمرية</option>
+        <option value="">اختر الفئة العمرية</option>
         <option>من 9 شهور لأقل من سنة</option>
         <option>من سنة لأقل من خمس سنوات</option>
         <option>من خمس سنوات إلى 10 سنوات</option>
@@ -119,15 +87,15 @@
 
       <label>الحالة التطعيمية بالحملة الحالية *</label>
       <select id="status" required>
-        <option value="">اختاري الحالة</option>
-        <option>مطعّم</option>
-        <option>غير مطعّم</option>
+        <option value="">اختر الحالة</option>
+        <option value="مطعّم">مطعّم</option>
+        <option value="غير مطعّم">غير مطعّم</option>
       </select>
 
-      <div id="reasonBox">
+      <div id="reasonBox" class="hidden">
         <label>سبب عدم التطعيم *</label>
         <select id="reason">
-          <option value="">اختاري السبب</option>
+          <option value="">اختر السبب</option>
           <option>رفض ولي الأمر</option>
           <option>حالة صحية مؤقتة</option>
           <option>حالة صحية دائمة</option>
@@ -135,36 +103,21 @@
         </select>
       </div>
 
-      <label>عرفت عن الحملة منين؟</label>
-      <input id="awareness" placeholder="مصدر المعرفة">
+      <label>أنت عرفت عن الحملة منين؟</label>
+      <textarea id="awareness"
+        placeholder="اكتب إجابة ولي الأمر كما ذكرها"></textarea>
 
       <label>اسم الباحث الميداني *</label>
-      <input id="researcher" required>
+      <input id="researcher" required placeholder="اسم الباحث">
 
-      <button type="submit">حفظ بيانات الطفل</button>
-      <div id="message"></div>
+      <p class="note">تاريخ ووقت الزيارة يتم تسجيلهما تلقائيًا.</p>
+
+      <button id="saveButton" type="submit">حفظ وإضافة طفل آخر</button>
+      <div id="message" role="status"></div>
     </form>
   </div>
-
-  <footer>
-    صحتكم غالية علينا<br>
-    فريق الطب الوقائي بالإدارة الصحية ببنها
-  </footer>
 </div>
 
-<script>
-  const status = document.getElementById('status');
-  const reasonBox = document.getElementById('reasonBox');
-  const reason = document.getElementById('reason');
-
-  status.addEventListener('change', function() {
-    const show = this.value === 'غير مطعّم';
-    reasonBox.style.display = show ? 'block' : 'none';
-    reason.required = show;
-    if (!show) reason.value = '';
-  });
-
-  // سيتم إضافة تحميل الوحدات والحفظ والمزامنة في الخطوات التالية.
-</script>
+<script src="app.js"></script>
 </body>
 </html>
