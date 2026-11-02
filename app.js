@@ -5,7 +5,29 @@ const STORE_NAME = 'pendingRecords';
 const $ = id => document.getElementById(id);
 
 let db;
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyE1-voegYmRClVzFYwxj3VyUeaBMOjN5Rrz8XSKp-YdS2HM4oHhfN0gvP3KJ6Q_hOe/exec';
 
+async function loadUnits() {
+  const response = await fetch(SCRIPT_URL);
+  const html = await response.text();
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const options = [...doc.querySelectorAll('#unit option')];
+
+  const unitSelect = $('unit');
+  unitSelect.innerHTML = '<option value="">اختاري الوحدة الصحية</option>';
+
+  options.forEach(option => {
+    if (option.value) {
+      unitSelect.add(new Option(option.textContent, option.value));
+    }
+  });
+
+  if (!options.length) {
+    throw new Error('لم يتم العثور على قائمة الوحدات');
+  }
+}
 function openDatabase() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
