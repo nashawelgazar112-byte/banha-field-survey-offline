@@ -1,0 +1,12 @@
+
+{
+  "name": "التحقق الميداني المستقل - حملة الحصبة ببنها",
+  "short_name": "حصر الحصبة",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f6fa",
+  "theme_color": "#15579a"
+}
