@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#15579a">
+  <title>الحصر الميداني - حملة الحصبة</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f2f6fa;
+      color: #18324b;
+      padding: 16px;
+    }
+    .container {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    header {
+      background: linear-gradient(135deg,#15579a,#087fb2);
+      color: white;
+      padding: 24px 18px;
+      border-radius: 18px;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    header h2 { margin: 0 0 10px; }
+    header p { margin: 5px 0; line-height: 1.7; }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 3px 14px #173b5510;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 17px 0 8px;
+    }
+    input, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd7e2;
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+      color: #18324b;
+    }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 11px;
+      padding: 15px;
+      margin-top: 22px;
+      background: #087fb2;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .note {
+      color: #607589;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+    #reasonBox { display: none; }
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      color: #607589;
+      font-size: 13px;
+      margin: 18px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h2>التحقق الميداني المستقل</h2>
+    <p>الحملة القومية للتطعيم ضد الحصبة والحصبة الألمانية</p>
+    <p>الإدارة الصحية ببنها – قسم الطب الوقائي</p>
+  </header>
+
+  <div class="card">
+    <h3>بيانات حصر الطفل</h3>
+
+    <form id="childForm">
+
+      <label>الوحدة الصحية *</label>
+      <select id="unit" required>
+        <option value="">اختاري الوحدة الصحية</option>
+      </select>
+
+      <label>العنوان *</label>
+      <input id="address" required placeholder="القرية أو المنطقة والعنوان">
+
+      <label>رقم تليفون ولي الأمر</label>
+      <input id="phone" type="tel" inputmode="numeric"
+        placeholder="اختياري">
+
+      <label>اسم الطفل *</label>
+      <input id="childName" required>
+
+      <label>الفئة العمرية *</label>
+      <select id="ageGroup" required>
+        <option value="">اختاري الفئة العمرية</option>
+        <option>من 9 شهور لأقل من سنة</option>
+        <option>من سنة لأقل من خمس سنوات</option>
+        <option>من خمس سنوات إلى 10 سنوات</option>
+      </select>
+
+      <label>الحالة التطعيمية بالحملة الحالية *</label>
+      <select id="status" required>
+        <option value="">اختاري الحالة</option>
+        <option>مطعّم</option>
+        <option>غير مطعّم</option>
+      </select>
+
+      <div id="reasonBox">
+        <label>سبب عدم التطعيم *</label>
+        <select id="reason">
+          <option value="">اختاري السبب</option>
+          <option>رفض ولي الأمر</option>
+          <option>حالة صحية مؤقتة</option>
+          <option>حالة صحية دائمة</option>
+          <option>تلقى التطعيم قبل كده وما استوفوش الفترة البينية</option>
+        </select>
+      </div>
+
+      <label>عرفت عن الحملة منين؟</label>
+      <input id="awareness" placeholder="مصدر المعرفة">
+
+      <label>اسم الباحث الميداني *</label>
+      <input id="researcher" required>
+
+      <button type="submit">حفظ بيانات الطفل</button>
+      <div id="message"></div>
+    </form>
+  </div>
+
+  <footer>
+    صحتكم غالية علينا<br>
+    فريق الطب الوقائي بالإدارة الصحية ببنها
+  </footer>
+</div>
+
+<script>
+  const status = document.getElementById('status');
+  const reasonBox = document.getElementById('reasonBox');
+  const reason = document.getElementById('reason');
+
+  status.addEventListener('change', function() {
+    const show = this.value === 'غير مطعّم';
+    reasonBox.style.display = show ? 'block' : 'none';
+    reason.required = show;
+    if (!show) reason.value = '';
+  });
+
+  // سيتم إضافة تحميل الوحدات والحفظ والمزامنة في الخطوات التالية.
+</script>
+</body>
+</html>
