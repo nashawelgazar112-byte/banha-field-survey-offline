@@ -1,4 +1,3 @@
-
 const DB_NAME = 'BanhaFieldSurvey';
 const STORE_NAME = 'pendingRecords';
 
@@ -6,16 +5,6 @@ const $ = id => document.getElementById(id);
 
 let db;
 
-  options.forEach(option => {
-    if (option.value) {
-      unitSelect.add(new Option(option.textContent, option.value));
-    }
-  });
-
-  if (!options.length) {
-    throw new Error('لم يتم العثور على قائمة الوحدات');
-  }
-}
 function openDatabase() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
